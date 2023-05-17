@@ -1,0 +1,21 @@
+{
+"compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "lib": ["esnext", "dom"],
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+    "@/*": ["src/*"]
+    },
+    "types": ["vite/client"]
+},
+"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "src/plugins/webfontloader.js", "src/plugins/vuetify.js"],
+"exclude": ["node_modules"]
+}
