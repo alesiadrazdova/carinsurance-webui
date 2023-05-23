@@ -1,5 +1,5 @@
 <template>
-  <v-main fill-height class="page-wrapper">
+  <v-main fill-height class="wrapper">
     <router-view />
   </v-main>
 </template>
@@ -9,7 +9,7 @@
 </script>
 
 <style scoped>
-.page-wrapper {
-  min-height: calc(100vh - 40px);
+.wrapper {
+  min-height: calc(100dvh - 40px);
 }
 </style>
