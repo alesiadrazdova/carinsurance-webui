@@ -1,12 +1,15 @@
 <template>
   <v-app>
-    <default-bar />
+    <bar />
 
-    <default-view />
+      <app-view />
+
+    <app-footer />
   </v-app>
 </template>
 
 <script lang="ts" setup>
-  import DefaultBar from './AppBar.vue'
-  import DefaultView from './View.vue'
+  import Bar from './AppBar.vue'
+  import AppView from './View.vue'
+  import AppFooter from './AppFooter.vue'
 </script>
