@@ -1,47 +1,47 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
-  const login = ref('')
-  const password = ref('')
-  const error = ref('')
-  const router = useRouter()
+const login = ref('')
+const password = ref('')
+const error = ref('')
+const router = useRouter()
 
-  const submitForm = async () => {
-    if (!login.value || !password.value) {
-    return;
-    }
-
-    const response = await fetch('http://localhost:8090/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        login: login.value,
-        password: password.value
-      })
-    })
-
-    if (response.ok) {
-      const data = await response.json()
-      if(data.message) {
-        error.value = 'Error logging in. Please try again.'
-      } else {
-        console.log(data)
-        sessionStorage.setItem('token', data.token)
-        error.value = login.value = password.value = ''
-        router.push('/user')
-      }
-    }
+const submitForm = async () => {
+  if (!login.value || !password.value) {
+    return
   }
 
-  const loginRules = computed(() => [
-    ( v: String ) => !!v || 'Login is required',
-  ])
-  const passwordRules = computed(() => [
-    ( v: String ) => !!v || 'Password is required',
-  ])
+  const response = await fetch('http://localhost:8090/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      login: login.value,
+      password: password.value
+    })
+  })
+
+  if (response.ok) {
+    const data = await response.json()
+    if(data.message) {
+      error.value = 'Error logging in. Please try again.'
+    } else {
+      console.log(data)
+      sessionStorage.setItem('token', data.token)
+      error.value = login.value = password.value = ''
+      router.push('/user')
+    }
+  }
+}
+
+const loginRules = computed(() => [
+  ( v: String ) => !!v || 'Login is required',
+])
+const passwordRules = computed(() => [
+  ( v: String ) => !!v || 'Password is required',
+])
 </script>
 
 <template>
