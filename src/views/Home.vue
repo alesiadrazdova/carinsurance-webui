@@ -1,26 +1,58 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router';
 
-  const username = ref('')
+  const login = ref('')
   const password = ref('')
+  const error = ref('')
+  const router = useRouter()
 
-  const usernameRules = computed(() => [
-    (    v: String) => !!v || 'Username is required',
+  const submitForm = async () => {
+    if (!login.value || !password.value) {
+    return;
+    }
+
+    const response = await fetch('http://localhost:8090/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        login: login.value,
+        password: password.value
+      })
+    })
+
+    if (response.ok) {
+      const data = await response.json()
+      if(data.message) {
+        error.value = 'Error logging in. Please try again.'
+      } else {
+        console.log(data)
+        sessionStorage.setItem('token', data.token)
+        error.value = login.value = password.value = ''
+        router.push('/user')
+      }
+    }
+  }
+
+  const loginRules = computed(() => [
+    ( v: String ) => !!v || 'Login is required',
   ])
   const passwordRules = computed(() => [
-    (    v: Number) => !!v || 'Password is required',
+    ( v: String ) => !!v || 'Password is required',
   ])
 </script>
 
 <template>
   <v-sheet width="300" class="pt-0 pt-md-16 mt-16 mx-auto">
     <h1 class="pb-6 text-center">Sign in</h1>
-    <v-form @submit.prevent>
+    <v-form @submit.prevent="submitForm()">
       <v-text-field
-        v-model="username"
-        label="Name"
+        v-model="login"
+        label="Login"
         required
-        :rules="usernameRules"
+        :rules="loginRules"
       ></v-text-field>
       <v-text-field
         v-model="password"
@@ -28,6 +60,7 @@ import { computed, ref } from 'vue'
         required
         :rules="passwordRules"
       ></v-text-field>
+      <p v-if="error" class="pb-2 text-error">{{ error }}</p>
       <div class="d-flex justify-center align-center">
         <v-btn rounded type="submit" class="mt-2 w-100" color="secondary">Sign in</v-btn>
       </div>
