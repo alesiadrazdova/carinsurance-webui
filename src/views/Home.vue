@@ -21,7 +21,8 @@ const submitForm = async () => {
     body: JSON.stringify({
       login: login.value,
       password: password.value
-    })
+    }),
+    // credentials: 'include'
   })
 
   if (response.ok) {
@@ -30,7 +31,7 @@ const submitForm = async () => {
       error.value = 'Error logging in. Please try again.'
     } else {
       console.log(data)
-      sessionStorage.setItem('token', data.token)
+      sessionStorage.setItem('token', data.token)  // this awaits implementation on the server side. Should be rewritten to cookies.
       error.value = login.value = password.value = ''
       router.push('/user')
     }
