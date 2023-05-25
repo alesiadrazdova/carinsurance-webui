@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { API_URLS } from '@/apiUrls';
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -12,7 +13,7 @@ const submitForm = async () => {
     return
   }
 
-  const response = await fetch('http://localhost:8090/auth/login', {
+  const response = await fetch(API_URLS.LOGIN, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -47,7 +48,7 @@ const passwordRules = computed(() => [
 <template>
   <v-sheet width="300" class="pt-0 pt-md-16 mt-16 mx-auto">
     <h1 class="pb-6 text-center">Sign in</h1>
-    <v-form @submit.prevent="submitForm()">
+    <v-form @submit.prevent="submitForm">
       <v-text-field
         v-model="login"
         label="Login"
