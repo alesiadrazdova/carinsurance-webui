@@ -31,7 +31,7 @@ const submitForm = async () => {
       error.value = 'Error logging in. Please try again.'
     } else {
       console.log(data)
-      sessionStorage.setItem('token', data.token)  // this awaits implementation on the server side. Should be rewritten to cookies.
+      sessionStorage.setItem('token', data.token)  // TODO: this awaits implementation on the server side. Should be rewritten to cookies.
       error.value = login.value = password.value = ''
       router.push('/user')
     }
