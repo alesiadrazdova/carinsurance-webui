@@ -25,6 +25,7 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
+    "src/**/*.apiUrls.ts",
     "src/**/*.vue",
     "vite.config.ts",
     "src/views/**/*.ts",
