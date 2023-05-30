@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { API_URLS } from '@/apiUrls';
+import axios from 'axios';
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -13,28 +14,28 @@ const submitForm = async () => {
     return
   }
 
-  const response = await fetch(API_URLS.LOGIN, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
+  try {
+    const response = await axios.post(API_URLS.LOGIN, {
       login: login.value,
       password: password.value
-    }),
-    // credentials: 'include'
-  })
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      // withCredentials: true
+    })
 
-  if (response.ok) {
-    const data = await response.json()
-    if(data.message) {
+    if(response.data.message.message === "Incorrect credentials") {
       error.value = 'Error logging in. Please try again.'
     } else {
-      console.log(data)
-      sessionStorage.setItem('token', data.token)  // TODO: this awaits implementation on the server side. Should be rewritten to cookies.
+      console.log(response.data)
+      localStorage.setItem('token', response.data.message.token)  // TODO: this awaits implementation on the server side. Should be rewritten to cookies.
       error.value = login.value = password.value = ''
       router.push('/user')
     }
+  } catch(err) {
+    console.error(err)
+    error.value = 'An error occurred. Please try again.'
   }
 }
 
