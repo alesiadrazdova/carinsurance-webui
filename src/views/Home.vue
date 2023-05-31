@@ -25,11 +25,10 @@ const submitForm = async () => {
       // withCredentials: true
     })
 
-    if(response.data.message.message === "Incorrect credentials") {
+    if(response.data.message === "Incorrect credentials") {
       error.value = 'Error logging in. Please try again.'
     } else {
-      console.log(response.data)
-      localStorage.setItem('token', response.data.message.token)  // TODO: this awaits implementation on the server side. Should be rewritten to cookies.
+      localStorage.setItem('token', response.data.message)  // TODO: this awaits implementation on the server side. Should be rewritten to cookies.
       error.value = login.value = password.value = ''
       router.push('/user')
     }
