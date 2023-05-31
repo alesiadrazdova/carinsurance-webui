@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+// import InsuranceCasesList from '@/components/InsuranceCasesList.vue';
+
+</script>
 <template>
-    <h1>Hello, my friend!</h1>
+    <router-view/>
 </template>

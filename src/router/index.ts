@@ -1,7 +1,13 @@
-// Composables
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
+import UserPage from '@/views/UserDetails.vue'
+import Home from '@/views/Home.vue'
+import InsuranceCasesList from '@/components/InsuranceCasesList.vue'
+import { Component } from 'vue'
 
-const routes = [
+const CaseInsurance: Component = InsuranceCasesList as any
+
+
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     component: () => import('@/layouts/default/Default.vue'),
@@ -12,15 +18,27 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
+        component: Home,
       },
     ],
   },
   {
     path: '/user',
     name: 'UserPage',
-    component: () => import('@/views/UserDetails.vue'),
-  },
+    component: UserPage,
+    children: [
+      {
+        path: 'cases',
+        name: 'InsuranceCasesList',
+        component: CaseInsurance
+      },
+      // {
+      //   path: 'cases/new',
+      //   name: 'NewCase',
+      //   component:
+      // }
+    ]
+  }
 ]
 
 const router = createRouter({

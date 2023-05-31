@@ -29,5 +29,7 @@
     "src/**/*.vue",
     "vite.config.ts",
     "src/views/**/*.ts",
+    "src/components/**/*.ts",
+    "src/**/*.types.ts",
   ]
 }
