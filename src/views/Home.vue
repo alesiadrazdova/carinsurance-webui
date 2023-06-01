@@ -9,37 +9,36 @@ const errorMessage = ref('')
 const router = useRouter()
 
 const submitForm = async () => {
-if (!login.value || !password.value) {
-return
-}
-try {
-const response = await fetch(API_URLS.LOGIN, {
-method: 'POST',
-headers: {
-'Content-Type': 'application/json'
-},
-body: JSON.stringify({
-login: login.value,
-password: password.value
-})
-});
+  if (!login.value || !password.value) {
+    return
+  }
+  try {
+    const response = await fetch(API_URLS.LOGIN, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        login: login.value,
+        password: password.value
+      }),
+      // credentials: 'include'
+    });
 
-if (response.status === 200) {
-console.log('Авторизация успешна')
-const data = await response.json()
-localStorage.setItem('token', data.token)
-errorMessage.value = login.value = password.value = ''
-router.push('/user')
-} else if (response.status === 401) {
-console.error('Ошибка авторизации')
-const errorData = await response.json()
-errorMessage.value = 'Error logging in. Please try again.'
-} else {
-console.error(`Unexpected error, status: ${response.status}`)
-}
-} catch (error) {
-console.error('Network or request error', error)
-}
+    if (response.status === 200) {
+      const data = await response.json()
+      localStorage.setItem('token', data.token)   // TODO: this awaits implementation on the server side. Should be rewritten to cookies.
+      errorMessage.value = login.value = password.value = ''
+      router.push('/user')
+    } else if (response.status === 401) {
+      const errorData = await response.json()
+      errorMessage.value = 'Error logging in. Please try again.'
+    } else {
+      console.error(`Unexpected error, status: ${response.status}`)
+    }
+  } catch (error) {
+    console.error('Network or request error', error)
+  }
 }
 
 const loginRules = computed(() => [
