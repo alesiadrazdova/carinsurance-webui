@@ -5,36 +5,40 @@ import { useRouter } from 'vue-router'
 
 const login = ref('')
 const password = ref('')
-const error = ref('')
+const errorMessage = ref('')
 const router = useRouter()
 
 const submitForm = async () => {
   if (!login.value || !password.value) {
     return
   }
+  try {
+    const response = await fetch(API_URLS.LOGIN, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        login: login.value,
+        password: password.value
+      })
+    });
 
-  const response = await fetch(API_URLS.LOGIN, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      login: login.value,
-      password: password.value
-    }),
-    // credentials: 'include'
-  })
-
-  if (response.ok) {
-    const data = await response.json()
-    if(data.message) {
-      error.value = 'Error logging in. Please try again.'
-    } else {
-      console.log(data)
-      sessionStorage.setItem('token', data.token)  // TODO: this awaits implementation on the server side. Should be rewritten to cookies.
-      error.value = login.value = password.value = ''
+    if (response.status === 200) {
+      console.log('Авторизация успешна')
+      const data = await response.json()
+      localStorage.setItem('token', data.token)
+      errorMessage.value = login.value = password.value = ''
       router.push('/user')
+    } else if (response.status === 401) {
+      console.error('Ошибка авторизации')
+      const errorData = await response.json()
+      errorMessage.value = 'Error logging in. Please try again.'
+    } else {
+      console.error(`Unexpected error, status: ${response.status}`)
     }
+  } catch (error) {
+    console.error('Network or request error', error)
   }
 }
 
@@ -62,7 +66,7 @@ const passwordRules = computed(() => [
         required
         :rules="passwordRules"
       ></v-text-field>
-      <p v-if="error" class="pb-2 text-error">{{ error }}</p>
+      <p v-if="errorMessage" class="pb-2 text-error">{{ errorMessage }}</p>
       <div class="d-flex justify-center align-center">
         <v-btn rounded type="submit" class="mt-2 w-100" color="secondary">Sign in</v-btn>
       </div>
