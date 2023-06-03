@@ -7,11 +7,13 @@ const login = ref('')
 const password = ref('')
 const errorMessage = ref('')
 const router = useRouter()
+const isLoading = ref(false)
 
 const submitForm = async () => {
   if (!login.value || !password.value) {
     return
   }
+  isLoading.value = true
   try {
     const response = await fetch(API_URLS.LOGIN, {
       method: 'POST',
@@ -39,6 +41,7 @@ const submitForm = async () => {
   } catch (error) {
     console.error('Network or request error', error)
   }
+  isLoading.value = false
 }
 
 const loginRules = computed(() => [
@@ -50,6 +53,13 @@ const passwordRules = computed(() => [
 </script>
 
 <template>
+  <div class="loader-container" v-if="isLoading">
+    <v-progress-circular
+        indeterminate
+        color="primary"
+        size="64"
+    ></v-progress-circular>
+  </div>
   <v-sheet width="300" class="pt-0 pt-md-16 mt-16 mx-auto">
     <h1 class="pb-6 text-center">Sign in</h1>
     <v-form @submit.prevent="submitForm">
@@ -67,7 +77,7 @@ const passwordRules = computed(() => [
       ></v-text-field>
       <p v-if="errorMessage" class="pb-2 text-error">{{ errorMessage }}</p>
       <div class="d-flex justify-center align-center">
-        <v-btn rounded type="submit" class="mt-2 w-100" color="secondary">Sign in</v-btn>
+        <v-btn rounded size="large" type="submit" class="mt-2 w-100" color="secondary">Sign in</v-btn>
       </div>
     </v-form>
   </v-sheet>
@@ -75,3 +85,18 @@ const passwordRules = computed(() => [
     <img class="d-block mx-auto" :class="['w-50', { 'w-75': $vuetify.display.xs}]" src="../assets/images/car-insurance.svg" alt="car-insurance-img"/>
   </div>
 </template>
+
+<style>
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
+</style>

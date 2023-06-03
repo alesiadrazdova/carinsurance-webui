@@ -19,6 +19,9 @@ export default createVuetify({
         colors: {
           primary: '#667DFF',
           secondary: '#B871FF',
+          success: '#009688',
+          disabled: '#BDBDBD',
+          inactiveColor: '#828282'
         },
       },
     },
