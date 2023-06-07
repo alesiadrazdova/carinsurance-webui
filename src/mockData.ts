@@ -3,16 +3,16 @@ import CaseInsurance from './types/CaseInsurance'
 export const mockCases: CaseInsurance[] = [
   {
     id: 310523,
-    clientFirstName: 'John',
-    clientLastName: "Smith",
+    firstName: 'John',
+    lastName: "Smith",
     agent: 'Insurance Agency Cascade',
     status: 'pending',
-    caseLocation: "Bialystok",
     phoneNumber: "524857452",
     caseDate: "2023-05-31T00:00:00.000Z",
     carMake: "BMW",
     carModel: "118i",
-    year: 2014,
+    carYear: 2014,
+    accidentLocation: "London, str.5th Avenue, 45-7",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \
@@ -26,16 +26,16 @@ export const mockCases: CaseInsurance[] = [
   },
   {
     id: 121222,
-    clientFirstName: 'John',
-    clientLastName: "Smith",
+    firstName: 'John',
+    lastName: "Smith",
     agent: 'Insurance Agency Cascade',
     status: 'paid',
-    caseLocation: "Bialystok",
     phoneNumber: "524857452",
     caseDate: "2022-12-12T00:00:00.000Z",
     carMake: "BMW",
     carModel: "118i",
-    year: 2014,
+    carYear: 2014,
+    accidentLocation: "London, str.5th Avenue, 45-7",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \
@@ -49,16 +49,16 @@ export const mockCases: CaseInsurance[] = [
   },
   {
     id: 270522,
-    clientFirstName: 'John',
-    clientLastName: "Smith",
+    firstName: 'John',
+    lastName: "Smith",
     agent: 'Insurance Agency Cascade',
     status: 'paid',
-    caseLocation: "Bialystok",
     phoneNumber: "524857452",
     caseDate: "2023-05-27T00:00:00.000Z",
     carMake: "Toyota",
     carModel: "Corola",
-    year: 2017,
+    carYear: 2017,
+    accidentLocation: "London, str.5th Avenue, 45-7",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \
@@ -72,16 +72,16 @@ export const mockCases: CaseInsurance[] = [
   },
   {
     id: 150423,
-    clientFirstName: 'Olivia',
-    clientLastName: "Jexson",
+    firstName: 'Olivia',
+    lastName: "Jexson",
     agent: 'BlambInsurance Agency',
     status: 'pending',
-    caseLocation: "Bialystok",
     phoneNumber: "524857452",
     caseDate: "2023-04-15T00:00:00.000Z",
     carMake: "Subaru",
     carModel: "Forester",
-    year: 2008,
+    carYear: 2008,
+    accidentLocation: "London, str.5th Avenue, 45-7",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \
@@ -95,16 +95,16 @@ export const mockCases: CaseInsurance[] = [
   },
   {
     id: 10821,
-    clientFirstName: 'Olivia',
-    clientLastName: "Jexson",
+    firstName: 'Olivia',
+    lastName: "Jexson",
     agent: 'BlambInsurance Agency',
     status: 'paid',
-    caseLocation: "Bialystok",
     phoneNumber: "524857452",
     caseDate: "2021-08-01T00:00:00.000Z",
     carMake: "Subaru",
     carModel: "Forester",
-    year: 2008,
+    carYear: 2008,
+    accidentLocation: "London, str.5th Avenue, 45-7",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \
@@ -118,16 +118,16 @@ export const mockCases: CaseInsurance[] = [
   },
   {
     id: 120222,
-    clientFirstName: 'Jessica',
-    clientLastName: "Simpson",
+    firstName: 'Jessica',
+    lastName: "Simpson",
     agent: 'Insurance Agency Cascade',
     status: 'pending',
-    caseLocation: "Bialystok",
     phoneNumber: "524857452",
     caseDate: "2022-02-12T00:00:00.000Z",
     carMake: "Audi",
     carModel: "Q8",
-    year: 2010,
+    carYear: 2010,
+    accidentLocation: "London, str.5th Avenue, 45-7",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \

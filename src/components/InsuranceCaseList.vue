@@ -10,6 +10,7 @@ export default defineComponent({
     }
   },
   setup() {
+
     const formatDate = (date: string | number | Date) => {
       const d = new Date(date);
       const day = ("0" + d.getDate()).slice(-2);
@@ -18,6 +19,7 @@ export default defineComponent({
 
       return `${day}.${month}.${year}`;
     }
+
     return { formatDate }
   }
 })
