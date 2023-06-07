@@ -1,4 +1,4 @@
-interface CaseInsurance {
+interface InsuranceCase {
   id: number,
   firstName: string,
   lastName: string,
@@ -16,4 +16,4 @@ interface CaseInsurance {
 
 }
 
-export default CaseInsurance
+export default InsuranceCase

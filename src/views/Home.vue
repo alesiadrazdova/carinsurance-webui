@@ -97,6 +97,6 @@ const passwordRules = computed(() => [
   justify-content: center;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.8);
-  z-index: 9999;
+  z-index: 1;
 }
 </style>

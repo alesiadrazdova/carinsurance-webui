@@ -1,4 +1,4 @@
-import CaseInsurance from './types/CaseInsurance'
+import CaseInsurance from './types/InsuranceCase'
 
 export const mockCases: CaseInsurance[] = [
   {
