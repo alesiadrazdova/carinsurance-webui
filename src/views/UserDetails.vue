@@ -2,10 +2,10 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { mockCases } from '@/mockData'
-import CaseInsurance from '@/types/CaseInsurance'
+import InsuranceCase from '@/types/InsuranceCase'
 import InsuranceCaseList from '@/components/InsuranceCaseList.vue'
 
-const cases = ref<CaseInsurance[]>(mockCases)
+const cases = ref<InsuranceCase[]>(mockCases)
 const router = useRouter()
 
 const goToNewCase = () => {

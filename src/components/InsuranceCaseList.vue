@@ -1,12 +1,12 @@
 <script lang="ts">
-import CaseInsurance from '@/types/CaseInsurance'
+import InsuranceCase from '@/types/InsuranceCase'
 import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
   props: {
     cases: {
       required: true,
-      type: Array as PropType<CaseInsurance[]>
+      type: Array as PropType<InsuranceCase[]>
     }
   },
   setup() {
@@ -45,11 +45,13 @@ export default defineComponent({
         </v-card-text>
       </v-col>
       <v-col cols="1" class="d-flex justify-center">
-        <span v-if="item.amount !== 0" class="text-h6 font-weight-medium">${{ item.amount }}</span>
-        <span v-else class="text-h6 font-weight-medium">–</span>
+        <span v-show="item.amount !== 0" class="text-h6 font-weight-medium">${{ item.amount }}</span>
       </v-col>
       <v-col cols="2" class="pr-8 d-flex justify-end">
-        <v-chip :color="item.status === 'pending' ? 'primary' : 'success'" class="w-75 justify-center">{{ item.status }}</v-chip>
+        <v-chip
+          :color="item.status === 'pending' ? 'primary' : 'success'"
+          class="w-75 justify-center"
+        >{{ item.status }}</v-chip>
       </v-col>
     </v-row>
   </v-card>
