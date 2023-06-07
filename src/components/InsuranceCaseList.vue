@@ -11,13 +11,15 @@ export default defineComponent({
   },
   setup() {
     const formatDate = (date: string | number | Date) => {
-      const d = new Date(date);
-      const day = ("0" + d.getDate()).slice(-2);
-      const month = ("0" + (d.getMonth() + 1)).slice(-2);
-      const year = d.getFullYear();
+    const dateItem = new Date(date);
+    const formatter = new Intl.DateTimeFormat('ru', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
 
-      return `${day}.${month}.${year}`;
-    }
+  return formatter.format(dateItem);
+}
     return { formatDate }
   }
 })
