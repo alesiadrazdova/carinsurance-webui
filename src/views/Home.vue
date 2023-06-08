@@ -24,16 +24,15 @@ const submitForm = async () => {
         login: login.value,
         password: password.value
       }),
-      // credentials: 'include'
+      credentials: 'include'
     });
-
     if (response.status === 200) {
       const data = await response.json()
-      localStorage.setItem('token', data.token)   // TODO: this awaits implementation on the server side. Should be rewritten to cookies.
+
+      localStorage.setItem('role', data.role)
       errorMessage.value = login.value = password.value = ''
-      router.push('/user')
+      router.push('/auth/client')
     } else if (response.status === 401) {
-      const errorData = await response.json()
       errorMessage.value = 'Error logging in. Please try again.'
     } else {
       console.error(`Unexpected error, status: ${response.status}`)

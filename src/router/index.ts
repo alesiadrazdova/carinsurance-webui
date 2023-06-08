@@ -5,27 +5,24 @@ import Home from '@/views/Home.vue'
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
+    redirect: '/auth/login'
+  },
+  {
+    path: '/auth',
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
-        path: '',
+        path: 'login',
         name: 'Home',
         component: Home,
       },
       {
-    path: '/user',
-    name: 'UserPage',
-    component: UserPage,
-    children: [
-      // {
-      //   path: 'new',
-      //   name: 'NewCase',
-      //   component:
-      // }
+        path: 'client',
+        name: 'UserPage',
+        component: UserPage,
+      }
     ]
-  }
-    ]
-  }
+  },
 ]
 
 const router = createRouter({
