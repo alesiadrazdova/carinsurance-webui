@@ -8,11 +8,11 @@ const routes: Array<RouteRecordRaw> = [
     redirect: '/auth/login'
   },
   {
-    path: '/auth',
+    path: '/',
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {
-        path: 'login',
+        path: 'auth/login',
         name: 'Home',
         component: Home,
       },

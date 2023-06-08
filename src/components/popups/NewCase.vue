@@ -1,29 +1,35 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import CaseInsurance from '@/types/CaseInsurance'
+import InsuranceCase from '@/types/InsuranceCase'
 
 export default defineComponent({
   props: {
     cases: {
-      type: Array as () => CaseInsurance[],
+      type: Array as () => InsuranceCase[],
       required: true
     }
   },
-  setup(props) {
-    // const date = ref((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10))
-    // const menu = ref(false)
+  setup() {
     const dialogVisible = ref(false)
     const user = ref({
       firstName: '',
       lastName: '',
+      phoneNumber: '',
+      email: '',
+      policyNumber: '',
+      endDatePolicy: '',
       carMake: '',
       carModel: '',
       carYear: null,
+      VIN: '',
+      registrationNumber: '',
       description: '',
-      phoneNumber: '',
-      email: '',
       accidentLocation: '',
-      interests: [],
+      dateAndTimeAccident: '',
+      firstNameThirdParty: '',
+      lastNameThirdParty: '',
+      phoneNumberThirdParty: '',
+      images: []
     })
 
     const closeDialog = () => {
@@ -31,7 +37,7 @@ export default defineComponent({
     }
 
     const submitForm = () => {
-      // обработка данных формы
+      // handing form data
       closeDialog()
     }
 
@@ -66,13 +72,16 @@ export default defineComponent({
       Create new claim
       </v-btn>
     </template>
-    <v-card>
-      <v-card-title>
-        <span class="text-h5">User Profile</span>
+    <v-card class="pb-2">
+      <v-card-title class="mt-6 text-center">
+        <span class="text-h4 font-weight-bold text-indigo-darken-2">Insurance claim form</span>
       </v-card-title>
       <v-card-text>
-        <v-container>
+        <v-container class="py-0">
           <v-row>
+            <v-col cols="12">
+              <span class="text-h6 font-weight-medium">Information about the insured</span>
+            </v-col>
             <v-col
               cols="12"
               sm="6"
@@ -82,6 +91,7 @@ export default defineComponent({
                 label="First name*"
                 required
                 v-model="user.firstName"
+                prepend-inner-icon="mdi-account"
               ></v-text-field>
             </v-col>
             <v-col
@@ -94,6 +104,7 @@ export default defineComponent({
                 persistent-hint
                 required
                 v-model="user.lastName"
+                prepend-inner-icon="mdi-account"
               ></v-text-field>
             </v-col>
             <v-col
@@ -102,32 +113,69 @@ export default defineComponent({
               md="4"
             >
               <v-text-field
-                label="VIN*"
-                persistent-hint
-                required
-                v-model="user.VIN"
+                label="Phone number"
+                hint="example of helper text only on focus"
+                v-model="user.phoneNumber"
+                prepend-inner-icon="mdi-phone"
               ></v-text-field>
             </v-col>
             <v-col
               cols="12"
               sm="6"
               md="4"
+            >
+              <v-text-field
+                label="Email*"
+                required
+                v-model="user.email"
+                prepend-inner-icon="mdi-email"
+              ></v-text-field>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+            >
+              <v-text-field
+                label="Insurance policy number*"
+                required
+                v-model="user.policyNumber"
+              ></v-text-field>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+            >
+              <v-text-field
+                label="Policy expiration date*"
+                required
+                v-model="user.endDatePolicy"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12">
+              <span class="text-h6 font-weight-medium">Vehicle Information</span>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
             >
               <v-text-field
                 label="Car make*"
                 hint="example of helper text only on focus"
                 v-model="user.carMake"
+                prepend-inner-icon="mdi-car"
               ></v-text-field>
             </v-col>
             <v-col
               cols="12"
               sm="6"
-              md="4"
             >
               <v-text-field
                 label="Car model*"
                 required
                 v-model="user.carModel"
+                prepend-inner-icon="mdi-car"
               ></v-text-field>
             </v-col>
             <v-col
@@ -148,9 +196,95 @@ export default defineComponent({
               md="4"
             >
               <v-text-field
+                label="VIN*"
+                persistent-hint
+                required
+                v-model="user.VIN"
+              ></v-text-field>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+            >
+              <v-text-field
+                label="Registration number*"
+                persistent-hint
+                required
+                v-model="user.registrationNumber"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12">
+              <span class="text-h6 font-weight-medium">Incident Information</span>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
+              md="8"
+            >
+              <v-text-field
+                prepend-inner-icon="mdi-map-marker"
                 label="Accident location*"
-                hint="example of helper text only on focus"
                 v-model="user.accidentLocation"
+              ></v-text-field>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+            >
+              <v-text-field
+                label="Accident date and time*"
+                v-model="user.dateAndTimeAccident"
+                prepend-inner-icon="mdi-clipboard-text-clock"
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12">
+              <v-textarea
+                label="Damage Information*"
+                type="text"
+                aria-required
+                v-model="user.description"
+                prepend-inner-icon="mdi-pencil"
+              ></v-textarea>
+            </v-col>
+            <v-col cols="12">
+              <v-file-input
+                show-size
+                counter
+                multiple
+                label="File input"
+                variant="filled"
+                prepend-inner-icon="mdi-camera"
+                v-model="user.images"
+              ></v-file-input>
+            </v-col>
+            <v-col cols="12">
+              <span class="text-h6 font-weight-medium">Third Party Information</span>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+            >
+              <v-text-field
+                label="First name*"
+                required
+                v-model="user.firstNameThirdParty"
+                prepend-inner-icon="mdi-account"
+              ></v-text-field>
+            </v-col>
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+            >
+              <v-text-field
+                label="Last name*"
+                persistent-hint
+                required
+                v-model="user.lastNameThirdParty"
+                prepend-inner-icon="mdi-account"
               ></v-text-field>
             </v-col>
             <v-col
@@ -161,73 +295,31 @@ export default defineComponent({
               <v-text-field
                 label="Phone number"
                 hint="example of helper text only on focus"
-                v-model="user.phoneNumber"
+                v-model="user.phoneNumberThirdParty"
+                prepend-inner-icon="mdi-phone"
               ></v-text-field>
-            </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
-              <v-text-field
-                label="Email*"
-                required
-                v-model="user.email"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12">
-              <v-textarea
-                label="Description*"
-                type="text"
-                aria-required
-                v-model="user.description"
-              ></v-textarea>
-            </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-            >
-              <v-select
-                :items="['0-17', '18-29', '30-54', '54+']"
-                label="Age*"
-                required
-                v-model="user.age"
-              ></v-select>
-            </v-col>
-            <v-col cols="6">
-              <v-file-input
-                label="File input"
-                variant="filled"
-                prepend-inner-icon="mdi-camera"
-              ></v-file-input>
-            </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-            >
-              <v-autocomplete
-                :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
-                label="Interests"
-                multiple
-                v-model="user.interests"
-              ></v-autocomplete>
             </v-col>
           </v-row>
         </v-container>
-        <small>*indicates required field</small>
+        <v-col cols="12">
+          <small>*I hereby declare that the information I have provided in this claim form is true,
+            complete, and correct to the best of my knowledge and belief. I understand that any misrepresentation,
+            falsification, or omission of information may result in denial of my claim.
+          </small>
+        </v-col>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
           color="blue-darken-1"
-          variant="text"
+          variant="outlined"
           @click="closeDialog"
         >
           Close
         </v-btn>
         <v-btn
-          color="blue-darken-1"
-          variant="text"
+          color="primary"
+          variant="flat"
           @click="submitForm"
         >
           Save

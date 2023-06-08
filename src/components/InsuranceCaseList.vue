@@ -10,7 +10,6 @@ export default defineComponent({
     }
   },
   setup() {
-
     const formatDate = (date: string | number | Date) => {
     const dateItem = new Date(date);
     const formatter = new Intl.DateTimeFormat(undefined, {

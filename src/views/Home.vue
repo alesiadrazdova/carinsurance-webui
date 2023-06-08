@@ -31,8 +31,9 @@ const submitForm = async () => {
 
       localStorage.setItem('role', data.role)
       errorMessage.value = login.value = password.value = ''
-      router.push('/auth/client')
+      router.push('/client')
     } else if (response.status === 401) {
+      const data = await response.json()
       errorMessage.value = 'Error logging in. Please try again.'
     } else {
       console.error(`Unexpected error, status: ${response.status}`)
