@@ -11,16 +11,13 @@ export default defineComponent({
   },
   setup() {
     const formatDate = (date: string | number | Date) => {
-    const dateItem = new Date(date);
     const formatter = new Intl.DateTimeFormat(undefined, {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
-    });
+    })
 
-    const formattedDate = formatter.format(dateItem);
-    const [day, month, year] = formattedDate.split('/');
-    return `${day}.${month}.${year}`;
+    return formatter.format(new Date(date))
 }
     return { formatDate }
   }

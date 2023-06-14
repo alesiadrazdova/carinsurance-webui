@@ -76,12 +76,12 @@ export default defineComponent({
         rounded
         size="large"
       >
-        Create new claim
+        Create new case
       </v-btn>
     </template>
     <v-card class="pb-2">
       <v-card-title class="mt-6 text-center">
-        <span class="text-h4 font-weight-bold text-indigo-darken-2">Insurance claim form</span>
+        <h2 class="text-indigo-darken-2">Insurance case form</h2>
       </v-card-title>
       <v-card-text>
         <v-container class="py-0">
@@ -89,157 +89,139 @@ export default defineComponent({
             <v-col cols="12">
               <span class="text-h6 font-weight-medium">Information about the insured</span>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
-                label="First name*"
                 required
                 v-model="user.firstName"
                 prepend-inner-icon="mdi-account"
-              ></v-text-field>
+              >
+                <template v-slot:label>
+                  <span class="required">First name</span>
+                </template>
+              </v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
-                label="Last name*"
                 required
                 v-model="user.lastName"
                 prepend-inner-icon="mdi-account"
-              ></v-text-field>
+              >
+                <template v-slot:label>
+                  <span class="required">Last name</span>
+                </template>
+              </v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
-                label="Phone number"
                 required
                 v-model="user.phoneNumber"
                 prepend-inner-icon="mdi-phone"
-              ></v-text-field>
+              >
+                <template v-slot:label>
+                  <span class="required">Phone number</span>
+                </template>
+              </v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
-                label="Email*"
-                required
+                label="Email"
                 v-model="user.email"
                 prepend-inner-icon="mdi-email"
               ></v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
-                label="Insurance policy number*"
                 required
                 v-model="user.policyNumber"
-              ></v-text-field>
+              >
+                <template v-slot:label>
+                  <span class="required">Insurance policy number</span>
+                </template>
+              </v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
-                label="Policy expiration date*"
                 required
                 v-model="user.endDatePolicy"
-              ></v-text-field>
+              >
+                <template v-slot:label>
+                  <span class="required">Policy expiration date</span>
+                </template>
+              </v-text-field>
             </v-col>
             <v-col cols="12">
               <span class="text-h6 font-weight-medium">Vehicle Information</span>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-            >
+            <v-col cols="12" sm="6">
               <v-text-field
-                label="Car make*"
                 required
                 v-model="user.carMake"
                 prepend-inner-icon="mdi-car"
-              ></v-text-field>
+              >
+                <template v-slot:label>
+                  <span class="required">Car make</span>
+                </template>
+              </v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-            >
+            <v-col cols="12" sm="6">
               <v-text-field
-                label="Car model*"
                 required
                 v-model="user.carModel"
                 prepend-inner-icon="mdi-car"
-              ></v-text-field>
+              >
+                <template v-slot:label>
+                  <span class="required">Car model</span>
+                </template>
+              </v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
-                label="Car year*"
                 persistent-hint
                 required
                 v-model="user.carYear"
-              ></v-text-field>
+              >
+                <template v-slot:label>
+                  <span class="required">Car year</span>
+                </template>
+              </v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
-                label="VIN*"
                 persistent-hint
                 required
                 v-model="user.VIN"
-              ></v-text-field>
+              >
+                <template v-slot:label>
+                  <span class="required">VIN</span>
+                </template>
+              </v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
-                label="Registration number*"
                 persistent-hint
                 required
                 v-model="user.registrationNumber"
-              ></v-text-field>
+              >
+                <template v-slot:label>
+                  <span class="required">Registration number</span>
+                </template>
+              </v-text-field>
             </v-col>
             <v-col cols="12">
               <span class="text-h6 font-weight-medium">Incident Information</span>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="8"
-            >
+            <v-col cols="12" sm="6" md="8">
               <v-text-field
                 prepend-inner-icon="mdi-map-marker"
                 required
-                label="Accident location*"
                 v-model="user.accidentLocation"
-              ></v-text-field>
+              >
+                <template v-slot:label>
+                  <span class="required">Accident location</span>
+                </template>
+              </v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <vue-date-picker
                 v-model="date"
                 :style="{ '--dp-input-padding' : '15px 0', '--dp-input-icon-padding' : '47px' }"
@@ -253,12 +235,16 @@ export default defineComponent({
             </v-col>
             <v-col cols="12">
               <v-textarea
-                label="Damage Information*"
+                label="Damage Information"
                 type="text"
                 aria-required
                 v-model="user.description"
                 prepend-inner-icon="mdi-pencil"
-              ></v-textarea>
+              >
+                <template v-slot:label>
+                  <span class="required">Damage Information</span>
+                </template>
+              </v-textarea>
             </v-col>
             <v-col cols="12">
               <v-file-input
@@ -274,33 +260,21 @@ export default defineComponent({
             <v-col cols="12">
               <span class="text-h6 font-weight-medium">Third Party Information</span>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
-                label="First name*"
+                label="First name"
                 v-model="user.firstNameThirdParty"
                 prepend-inner-icon="mdi-account"
               ></v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
-                label="Last name*"
+                label="Last name"
                 v-model="user.lastNameThirdParty"
                 prepend-inner-icon="mdi-account"
               ></v-text-field>
             </v-col>
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
+            <v-col cols="12" sm="6" md="4">
               <v-text-field
                 label="Phone number"
                 hint="example of helper text only on focus"
@@ -347,5 +321,10 @@ export default defineComponent({
   --dp-border-color-hover: none;
   --dp-background-color: #F6F6F6;
   --db-background-color-hover: #EDEDED;
+}
+.required::after {
+  content: "*";
+  color: red;
+  margin-left: 5px;
 }
 </style>
