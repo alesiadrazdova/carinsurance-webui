@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { mockCases } from '@/mockData'
-import InsuranceCase from '@/types/InsuranceCase'
+import type InsuranceCase from '@/types/InsuranceCase'
 import InsuranceCaseList from '@/components/InsuranceCaseList.vue'
 import NewCase from '@/components/popups/NewCase.vue'
 

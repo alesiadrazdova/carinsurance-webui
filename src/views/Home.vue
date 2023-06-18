@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { API_URLS } from '@/apiUrls';
+import { API_URLS } from '@/apiUrls'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -25,13 +25,13 @@ const submitForm = async () => {
         password: password.value
       }),
       credentials: 'include'
-    });
+    })
     if (response.status === 200) {
       const data = await response.json()
 
       localStorage.setItem('role', data.role)
       errorMessage.value = login.value = password.value = ''
-      router.push('/client')
+      router.push('/api/client')
     } else if (response.status === 401) {
       const data = await response.json()
       errorMessage.value = 'Error logging in. Please try again.'
