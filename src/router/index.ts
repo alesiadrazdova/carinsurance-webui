@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 import UserPage from '@/views/UserDetails.vue'
 import Home from '@/views/Home.vue'
 
@@ -17,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
         component: Home,
       },
       {
-        path: 'client',
+        path: 'api/client',
         name: 'UserPage',
         component: UserPage,
       }

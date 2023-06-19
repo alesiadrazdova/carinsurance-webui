@@ -1,10 +1,9 @@
-// Plugins
-import vue from '@vitejs/plugin-vue'
-import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
-
-// Utilities
-import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
+import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import tsconfigPaths from 'vite-tsconfig-paths'
+
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -12,15 +11,18 @@ export default defineConfig({
     vue({
       template: { transformAssetUrls }
     }),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     vuetify({
       autoImport: true,
       styles: {
         configFile: 'src/styles/settings.scss',
       },
     }),
+    tsconfigPaths()
   ],
   define: { 'process.env': {} },
+  server: {
+    port: 3000
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
@@ -34,8 +36,5 @@ export default defineConfig({
       '.tsx',
       '.vue',
     ],
-  },
-  server: {
-    port: 3000,
-  },
+  }
 })

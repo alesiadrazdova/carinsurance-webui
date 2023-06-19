@@ -1,9 +1,23 @@
 {
+  "extends": "@tsconfig/node18/tsconfig.json",
+  "include": [
+    "vite.config.*",
+    "vitest.config.*",
+    "cypress.config.*",
+    "nightwatch.conf.*",
+    "playwright.config.*"
+  ],
+  "paths": {
+    "@/*": ["src/*"]
+  },
   "compilerOptions": {
     "composite": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "allowSyntheticDefaultImports": true
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": false,
+    "types": ["node"]
   },
-  "include": ["vite.config.ts"]
+  "vitest": {
+    "testPathIgnorePatterns": ["/node_modules/", "<rootDir>/src/views/"]
+  }
 }

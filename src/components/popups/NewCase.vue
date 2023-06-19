@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import InsuranceCase from '@/types/InsuranceCase'
+import type InsuranceCase from '@/types/InsuranceCase'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 

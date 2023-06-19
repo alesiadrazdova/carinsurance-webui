@@ -1,8 +1,13 @@
 <script lang="ts">
-import InsuranceCase from '@/types/InsuranceCase'
-import { defineComponent, PropType } from 'vue'
+import type InsuranceCase from '@/types/InsuranceCase'
+import { defineComponent } from 'vue'
+import type { PropType } from 'vue'
+import { formatDate } from '../dateUtils'
 
 export default defineComponent({
+  components: {
+    formatDate
+  },
   props: {
     cases: {
       required: true,
@@ -10,15 +15,6 @@ export default defineComponent({
     }
   },
   setup() {
-    const formatDate = (date: string | number | Date) => {
-    const formatter = new Intl.DateTimeFormat(undefined, {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    })
-
-    return formatter.format(new Date(date))
-}
     return { formatDate }
   }
 })
