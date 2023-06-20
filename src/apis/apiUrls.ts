@@ -1,3 +1,6 @@
+export const API_BASE = 'http://localhost:8090';
+
 export const API_URLS = {
-  LOGIN: 'http://localhost:8090/auth/login'
+  BASE_URL: API_BASE,
+  LOGIN: `${API_BASE}/auth/login`
 }

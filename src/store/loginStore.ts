@@ -10,6 +10,7 @@ export const useLoginStore = defineStore('login', () => {
   const isLoading = ref(false)
   const errorMessage = ref('')
   const router = useRouter()
+  const snackbar = ref(false)
 
   const setLogin = (newLogin: string) => {
     login.value = newLogin;
@@ -39,12 +40,13 @@ export const useLoginStore = defineStore('login', () => {
         errorMessage.value = 'Error logging in. Please try again.'
       } else {
         console.error(`Unexpected error, status: ${response.status}`)
+        }
+      } catch (error) {
+        snackbar.value = true
+        console.error('Network or request error', error)
       }
-    } catch (error) {
-      console.error('Network or request error', error)
+      isLoading.value = false
     }
-    isLoading.value = false
-  }
 
   return {
     login,
@@ -54,6 +56,7 @@ export const useLoginStore = defineStore('login', () => {
     errorMessage,
     setLogin,
     setPassword,
-    submitForm
+    submitForm,
+    snackbar
   }
 })

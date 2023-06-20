@@ -44,6 +44,22 @@ const passwordRules = computed(() => [
   <div class="pt-16 d-flex justify-center align-center">
     <img class="d-block mx-auto" :class="['w-50', { 'w-75': $vuetify.display.xs}]" src="../assets/images/car-insurance.svg" alt="car-insurance-img"/>
   </div>
+  <v-snackbar
+    v-model="loginStore.snackbar"
+    color="red-lighten-1"
+    :timeout="3000"
+  >
+    Error logging in. Please try again.
+    <template v-slot:actions>
+      <v-btn
+        color="white"
+        variant="text"
+        @click="loginStore.snackbar = false"
+      >
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 
 <style>

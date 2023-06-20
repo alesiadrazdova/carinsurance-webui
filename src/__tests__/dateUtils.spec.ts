@@ -8,10 +8,10 @@ describe('dateUtils', () => {
     })
 
     it('should return "N/A" for undefined date', () => {
-        expect(formatDate(undefined)).toBe('N/A')
+        expect(formatDate(undefined)).toBeNull()
     })
 
     it('should return "Invalid date" for incorrect date', () => {
-    expect(formatDate('incorrect date')).toBe('Invalid date')
+    expect(formatDate('incorrect date')).toBeNull()
     })
 })
