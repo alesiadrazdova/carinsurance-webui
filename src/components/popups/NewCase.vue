@@ -16,25 +16,27 @@ export default defineComponent({
   },
   setup() {
     const dialogVisible = ref(false)
-    const date = ref(new Date())
+    // temporary mock data
+    const insuranceExpiryDate = ref(new Date())
+    const incidentDate = ref(new Date())
+    const licenseExpiration = ref(new Date())
     const user = ref({
-      firstName: '',
-      lastName: '',
       phoneNumber: '',
       email: '',
-      policyNumber: '',
-      endDatePolicy: '',
+      insuranceCompany: '',
       carMake: '',
       carModel: '',
       carYear: null,
       VIN: '',
-      registrationNumber: '',
+      odometer: '',
+      licensePlate: '',
       description: '',
-      accidentLocation: '',
-      dateAndTimeAccident: '',
-      firstNameThirdParty: '',
-      lastNameThirdParty: '',
-      phoneNumberThirdParty: '',
+      address: '',
+      zip: '',
+      state: '',
+      city: '',
+      licenseState: '',
+      licenseExpiration: '',
       images: [],
     })
 
@@ -57,7 +59,9 @@ export default defineComponent({
       closeDialog,
       submitForm,
       openCreateCaseDialog,
-      date
+      insuranceExpiryDate,
+      incidentDate,
+      licenseExpiration
     }
   }
 })
@@ -87,29 +91,20 @@ export default defineComponent({
         <v-container class="py-0">
           <v-row>
             <v-col cols="12">
-              <span class="text-h6 font-weight-medium">Information about the insured</span>
+              <span class="text-h6 font-weight-medium">Contacts</span>
             </v-col>
             <v-col cols="12" sm="6" md="4">
               <v-text-field
-                required
-                v-model="user.firstName"
-                prepend-inner-icon="mdi-account"
-              >
-                <template v-slot:label>
-                  <span class="required">First name</span>
-                </template>
-              </v-text-field>
+                label="Email"
+                v-model="user.email"
+                prepend-inner-icon="mdi-email"
+              ></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                required
-                v-model="user.lastName"
-                prepend-inner-icon="mdi-account"
-              >
-                <template v-slot:label>
-                  <span class="required">Last name</span>
-                </template>
-              </v-text-field>
+              <v-select
+                label="Select type of phone"
+                :items="['Home', 'Business', 'Mobile', 'Fax', 'Other']"
+              ></v-select>
             </v-col>
             <v-col cols="12" sm="6" md="4">
               <v-text-field
@@ -122,41 +117,98 @@ export default defineComponent({
                 </template>
               </v-text-field>
             </v-col>
+            <v-col cols="12" sm="8">
+              <v-select
+                label="Select Insurance company"
+                prepend-inner-icon="mdi-shield-car"
+                :items="['Company1', 'Company2', 'Company3']"
+              ></v-select>
+            </v-col>
+            <v-col cols="12" sm="4">
+              <vue-date-picker
+              v-model="insuranceExpiryDate"
+              :style="{ '--dp-input-padding' : '15px 0', '--dp-input-icon-padding' : '47px' }"
+              class="date-picker"
+              required
+              :enable-time-picker="false"
+              >
+              <template #input-icon>
+                <v-icon class="px-4">mdi-clock-time-eight</v-icon>
+              </template>
+            </vue-date-picker>
+            <p class="text-caption text-grey-darken-1">Select insurance expiry date</p>
+            </v-col>
             <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                label="Email"
-                v-model="user.email"
-                prepend-inner-icon="mdi-email"
-              ></v-text-field>
+              <v-select
+                label="Select type of address"
+                prepend-inner-icon="mdi-home"
+                :items="['Home', 'Work', 'Mailing', 'Other']"
+              ></v-select>
             </v-col>
             <v-col cols="12" sm="6" md="4">
               <v-text-field
                 required
-                v-model="user.policyNumber"
+                v-model="user.zip"
               >
                 <template v-slot:label>
-                  <span class="required">Insurance policy number</span>
+                  <span class="required">Zip</span>
                 </template>
               </v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
               <v-text-field
+                prepend-inner-icon="mdi-map-marker"
                 required
-                v-model="user.endDatePolicy"
+                v-model="user.state"
               >
                 <template v-slot:label>
-                  <span class="required">Policy expiration date</span>
+                  <span class="required">State</span>
+                </template>
+              </v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field
+                prepend-inner-icon="mdi-map-marker"
+                required
+                v-model="user.city"
+              >
+                <template v-slot:label>
+                  <span class="required">City</span>
+                </template>
+              </v-text-field>
+            </v-col>
+            <v-col cols="12" sm="8">
+              <v-text-field
+                prepend-inner-icon="mdi-map-marker"
+                required
+                v-model="user.address"
+              >
+                <template v-slot:label>
+                  <span class="required">Address</span>
                 </template>
               </v-text-field>
             </v-col>
             <v-col cols="12">
-              <span class="text-h6 font-weight-medium">Vehicle Information</span>
+              <v-textarea
+                label="Incident Information"
+                type="text"
+                aria-required
+                v-model="user.description"
+                prepend-inner-icon="mdi-pencil"
+              >
+                <template v-slot:label>
+                  <span class="required">Incident information</span>
+                </template>
+              </v-textarea>
+            </v-col>
+            <v-col cols="12">
+              <span class="text-h6 font-weight-medium">Vehicle information</span>
             </v-col>
             <v-col cols="12" sm="6">
               <v-text-field
                 required
                 v-model="user.carMake"
-                prepend-inner-icon="mdi-car"
+                prepend-inner-icon="mdi-car-info"
               >
                 <template v-slot:label>
                   <span class="required">Car make</span>
@@ -167,7 +219,7 @@ export default defineComponent({
               <v-text-field
                 required
                 v-model="user.carModel"
-                prepend-inner-icon="mdi-car"
+                prepend-inner-icon="mdi-car-info"
               >
                 <template v-slot:label>
                   <span class="required">Car model</span>
@@ -200,30 +252,55 @@ export default defineComponent({
               <v-text-field
                 persistent-hint
                 required
-                v-model="user.registrationNumber"
+                v-model="user.odometer"
               >
                 <template v-slot:label>
-                  <span class="required">Registration number</span>
-                </template>
-              </v-text-field>
-            </v-col>
-            <v-col cols="12">
-              <span class="text-h6 font-weight-medium">Incident Information</span>
-            </v-col>
-            <v-col cols="12" sm="6" md="8">
-              <v-text-field
-                prepend-inner-icon="mdi-map-marker"
-                required
-                v-model="user.accidentLocation"
-              >
-                <template v-slot:label>
-                  <span class="required">Accident location</span>
+                  <span class="required">Odometer Value</span>
                 </template>
               </v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
+              <v-text-field
+                persistent-hint
+                required
+                v-model="user.licensePlate"
+              >
+                <template v-slot:label>
+                  <span class="required">License Plate</span>
+                </template>
+              </v-text-field>
+            </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field
+                persistent-hint
+                required
+                v-model="user.licenseState"
+              >
+                <template v-slot:label>
+                  <span class="required">License State</span>
+                </template>
+              </v-text-field>
+            </v-col>
+            <v-col cols="12" sm="4">
               <vue-date-picker
-                v-model="date"
+                v-model="licenseExpiration"
+                :style="{ '--dp-input-padding' : '15px 0', '--dp-input-icon-padding' : '47px' }"
+                class="date-picker"
+                required
+                :enable-time-picker="false"
+              >
+              <template #input-icon>
+                <v-icon class="px-4">mdi-clock-time-eight</v-icon>
+              </template>
+            </vue-date-picker>
+            <p class="text-caption text-grey-darken-1">License expiration</p>
+            </v-col>
+            <v-col cols="12">
+              <span class="text-h6 font-weight-medium">Vehicle condition</span>
+            </v-col>
+            <v-col cols="12" sm="6">
+              <vue-date-picker
+                v-model="incidentDate"
                 :style="{ '--dp-input-padding' : '15px 0', '--dp-input-icon-padding' : '47px' }"
                 class="date-picker"
                 required
@@ -232,21 +309,16 @@ export default defineComponent({
                     <v-icon class="px-4">mdi-clock-time-eight</v-icon>
                   </template>
               </vue-date-picker>
+              <p class="text-caption text-grey-darken-1">Select incident date</p>
             </v-col>
-            <v-col cols="12">
-              <v-textarea
-                label="Damage Information"
-                type="text"
-                aria-required
-                v-model="user.description"
-                prepend-inner-icon="mdi-pencil"
-              >
-                <template v-slot:label>
-                  <span class="required">Damage Information</span>
-                </template>
-              </v-textarea>
+            <v-col cols="12" sm="6">
+              <v-select
+                label="Select direction of an impact"
+                prepend-inner-icon="mdi-car-wrench"
+                :items="['Front', 'Front right', 'Right side', 'Right quarter panel', 'Right rear', 'Rear', 'Front left', 'Left side', 'Left quarter panel', 'Left rear']"
+              ></v-select>
             </v-col>
-            <v-col cols="12">
+            <v-col  cols="12">
               <v-file-input
                 show-size
                 counter
@@ -256,31 +328,6 @@ export default defineComponent({
                 prepend-inner-icon="mdi-camera"
                 v-model="user.images"
               ></v-file-input>
-            </v-col>
-            <v-col cols="12">
-              <span class="text-h6 font-weight-medium">Third Party Information</span>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                label="First name"
-                v-model="user.firstNameThirdParty"
-                prepend-inner-icon="mdi-account"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                label="Last name"
-                v-model="user.lastNameThirdParty"
-                prepend-inner-icon="mdi-account"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" sm="6" md="4">
-              <v-text-field
-                label="Phone number"
-                hint="example of helper text only on focus"
-                v-model="user.phoneNumberThirdParty"
-                prepend-inner-icon="mdi-phone"
-              ></v-text-field>
             </v-col>
           </v-row>
         </v-container>
