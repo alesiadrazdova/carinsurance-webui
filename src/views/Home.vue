@@ -1,15 +1,14 @@
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { ref } from 'vue'
 import { useLoginStore } from '@/store/loginStore'
 
+const visible = ref(false)
+const rules = ref({
+  required: ( value: String ) => !!value || 'Required.',
+  min: ( v: String ) => v.length >= 5 || 'Min 5 characters'
+})
 const loginStore = useLoginStore()
 
-const loginRules = computed(() => [
-  ( v: String ) => !!v || 'Login is required',
-])
-const passwordRules = computed(() => [
-  ( v: String ) => !!v || 'Password is required',
-])
 </script>
 
 <template>
@@ -26,14 +25,23 @@ const passwordRules = computed(() => [
       <v-text-field
         v-model="loginStore.login"
         label="Login"
+        name="login"
+        hint="At least 5 characters"
         required
-        :rules="loginRules"
+        :rules="[rules.required, rules.min]"
       ></v-text-field>
       <v-text-field
         v-model="loginStore.password"
+        :append-inner-icon="visible ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[rules.required, rules.min]"
+        :type="visible ? 'text' : 'password'"
+        prepend-inner-icon="mdi-lock-outline"
+        name="password"
         label="Password"
+        hint="At least 5 characters"
         required
-        :rules="passwordRules"
+        counter
+        @click:append-inner="visible = !visible"
       ></v-text-field>
       <p v-if="loginStore.errorMessage" class="pb-2 text-error">{{ loginStore.errorMessage }}</p>
       <div class="d-flex justify-center align-center">
@@ -44,6 +52,22 @@ const passwordRules = computed(() => [
   <div class="pt-16 d-flex justify-center align-center">
     <img class="d-block mx-auto" :class="['w-50', { 'w-75': $vuetify.display.xs}]" src="../assets/images/car-insurance.svg" alt="car-insurance-img"/>
   </div>
+  <v-snackbar
+    v-model="loginStore.snackbar"
+    color="red-lighten-1"
+    :timeout="3000"
+  >
+    Error logging in. Please try again.
+    <template v-slot:actions>
+      <v-btn
+        color="white"
+        variant="text"
+        @click="loginStore.snackbar = false"
+      >
+        Close
+      </v-btn>
+    </template>
+  </v-snackbar>
 </template>
 
 <style>

@@ -1,21 +1,12 @@
-<script lang="ts">
+<script lang="ts" setup>
 import type InsuranceCase from '@/types/InsuranceCase'
-import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { formatDate } from '../dateUtils'
 
-export default defineComponent({
-  components: {
-    formatDate
-  },
-  props: {
-    cases: {
-      required: true,
-      type: Array as PropType<InsuranceCase[]>
-    }
-  },
-  setup() {
-    return { formatDate }
+defineProps({
+  cases: {
+    type: Array as any as PropType<InsuranceCase[]>,
+    required: true
   }
 })
 </script>

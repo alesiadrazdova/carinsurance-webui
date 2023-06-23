@@ -8,7 +8,7 @@ export const mockCases: CaseInsurance[] = [
     agent: 'Insurance Agency Cascade',
     status: 'pending',
     phoneNumber: "524857452",
-    caseDate: "2023-05-31T00:00:00.000Z",
+    caseDate: "",
     carMake: "BMW",
     carModel: "118i",
     carYear: 2014,

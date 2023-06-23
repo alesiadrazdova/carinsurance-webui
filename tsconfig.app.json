@@ -13,7 +13,10 @@
     "src/components/**/*.ts",
     "src/**/*.types.ts",
     "src/types/InsuranceCase.ts",
-    "src/mockData.ts"
+    "src/mockData.ts",
+    "src/views/UserDetails.vue",
+    "src/views/Home.vue",
+    "src/layouts/default/Default.vue"
   ],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {

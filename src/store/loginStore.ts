@@ -10,13 +10,14 @@ export const useLoginStore = defineStore('login', () => {
   const isLoading = ref(false)
   const errorMessage = ref('')
   const router = useRouter()
+  const snackbar = ref(false)
 
   const setLogin = (newLogin: string) => {
-    login.value = newLogin;
+    login.value = newLogin
   }
 
   const setPassword = (newPassword: string) => {
-    password.value = newPassword;
+    password.value = newPassword
   }
 
   const submitForm = async () => {
@@ -30,21 +31,46 @@ export const useLoginStore = defineStore('login', () => {
 
       if (response.status === 200) {
         const data = await response.json()
-        role.value = data.role
-        localStorage.setItem('role', role.value)
-        errorMessage.value = login.value = password.value = ''
-        router.push('/api/client')
+        const roleMatch = data.role.match(/\[(.*?)\]/)
+        const authenticated = data.message
+
+        if (roleMatch) {
+          const roleValue = roleMatch[1].trim()
+
+          role.value = roleValue
+          localStorage.setItem('role', roleValue)
+          localStorage.setItem('message', authenticated)
+          errorMessage.value = login.value = password.value = ''
+
+          switch (roleValue) {
+            case 'ROLE_Client':
+              router.push('/api/client')
+              break
+            case 'ROLE_Insurance agency':
+              router.push('/api/insurance_agency')
+              break
+            case 'ROLE_Estimator':
+              router.push('/api/estimator')
+              break
+            default:
+              console.error('Unknown role')
+          }
+
+        } else {
+          console.error('Invalid role format')
+        }
       } else if (response.status === 401) {
         const data = await response.json()
         errorMessage.value = 'Error logging in. Please try again.'
       } else {
         console.error(`Unexpected error, status: ${response.status}`)
       }
-    } catch (error) {
-      console.error('Network or request error', error)
+      } catch (error) {
+        snackbar.value = true
+        console.error('Network or request error', error)
+      }
+      isLoading.value = false
     }
-    isLoading.value = false
-  }
 
   return {
     login,
@@ -54,6 +80,7 @@ export const useLoginStore = defineStore('login', () => {
     errorMessage,
     setLogin,
     setPassword,
-    submitForm
+    submitForm,
+    snackbar
   }
 })
