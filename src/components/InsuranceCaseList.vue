@@ -5,9 +5,9 @@ import { formatDate } from '../dateUtils'
 
 defineProps({
   cases: {
-      type: Array as any as PropType<InsuranceCase[]>,
-      required: true
-    }
+    type: Array as any as PropType<InsuranceCase[]>,
+    required: true
+  }
 })
 </script>
 

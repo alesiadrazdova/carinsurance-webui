@@ -40,7 +40,6 @@ const submitForm = () => {
 const openCreateCaseDialog = () => {
   dialogVisible.value = true
 }
-
 </script>
 
 <template>
