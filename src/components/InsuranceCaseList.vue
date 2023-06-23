@@ -1,22 +1,13 @@
-<script lang="ts">
+<script lang="ts" setup>
 import type InsuranceCase from '@/types/InsuranceCase'
-import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 import { formatDate } from '../dateUtils'
 
-export default defineComponent({
-  components: {
-    formatDate
-  },
-  props: {
-    cases: {
-      required: true,
-      type: Array as PropType<InsuranceCase[]>
+defineProps({
+  cases: {
+      type: Array as any as PropType<InsuranceCase[]>,
+      required: true
     }
-  },
-  setup() {
-    return { formatDate }
-  }
 })
 </script>
 
@@ -30,18 +21,18 @@ export default defineComponent({
   >
     <v-row class="justify-space-between fill-height align-center">
       <v-col cols="2" class="pl-8 d-flex flex-column">
-        <div class="text-subtitle-1 font-weight-bold">CI-{{ item.id }}</div>
+        <div class="text-subtitle-1 font-weight-bold">{{ item.id }}</div>
         <div class="text-body-2 text-inactiveColor">{{ formatDate(item.caseDate) }}</div>
       </v-col>
       <v-col cols="2">
         <span class="pl-2 text-subtitle-1">{{ item.carMake }} {{ item.carModel }}</span>
       </v-col>
-      <v-col cols="2">
+      <v-col cols="3">
         <v-card-text>
           {{ item.agent }}
         </v-card-text>
       </v-col>
-      <v-col cols="1" class="d-flex justify-center">
+      <v-col cols="2" class="d-flex justify-center">
         <span v-show="item.amount !== 0" class="text-h6 font-weight-medium">${{ item.amount }}</span>
       </v-col>
       <v-col cols="2" class="pr-8 d-flex justify-end">

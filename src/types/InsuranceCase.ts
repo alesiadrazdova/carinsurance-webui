@@ -9,7 +9,7 @@ interface InsuranceCase {
   carMake: string,
   carModel: string,
   carYear: number,
-  accidentLocation: string,
+  insuranceExpiryDate: string,
   description: string,
   imgs: string[],
   amount: number

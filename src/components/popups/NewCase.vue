@@ -1,70 +1,46 @@
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import type InsuranceCase from '@/types/InsuranceCase'
+<script lang="ts" setup>
+import { ref } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 
-export default defineComponent({
-  components: {
-    VueDatePicker
-  },
-  props: {
-    cases: {
-      type: Array as () => InsuranceCase[],
-      required: true
-    }
-  },
-  setup() {
-    const dialogVisible = ref(false)
-    // temporary mock data
-    const insuranceExpiryDate = ref(new Date())
-    const incidentDate = ref(new Date())
-    const licenseExpiration = ref(new Date())
-    const user = ref({
-      phoneNumber: '',
-      email: '',
-      insuranceCompany: '',
-      carMake: '',
-      carModel: '',
-      carYear: null,
-      VIN: '',
-      odometer: '',
-      licensePlate: '',
-      description: '',
-      address: '',
-      zip: '',
-      state: '',
-      city: '',
-      licenseState: '',
-      licenseExpiration: '',
-      images: [],
-    })
-
-    const closeDialog = () => {
-      dialogVisible.value = false
-    }
-
-    const submitForm = () => {
-      // handing form data
-      closeDialog()
-    }
-
-    const openCreateCaseDialog = () => {
-      dialogVisible.value = true
-    }
-
-    return {
-      dialogVisible,
-      user,
-      closeDialog,
-      submitForm,
-      openCreateCaseDialog,
-      insuranceExpiryDate,
-      incidentDate,
-      licenseExpiration
-    }
-  }
+const dialogVisible = ref(false)
+// temporary mock data
+const insuranceExpiryDate = ref(new Date())
+const incidentDate = ref(new Date())
+const licenseExpiration = ref(new Date())
+const user = ref({
+  phoneNumber: '',
+  email: '',
+  insuranceCompany: '',
+  carMake: '',
+  carModel: '',
+  carYear: null,
+  VIN: '',
+  odometer: '',
+  licensePlate: '',
+  description: '',
+  address: '',
+  zip: '',
+  state: '',
+  city: '',
+  licenseState: '',
+  licenseExpiration: '',
+  images: [],
 })
+
+const closeDialog = () => {
+  dialogVisible.value = false
+}
+
+const submitForm = () => {
+  // handing form data
+  closeDialog()
+}
+
+const openCreateCaseDialog = () => {
+  dialogVisible.value = true
+}
+
 </script>
 
 <template>
