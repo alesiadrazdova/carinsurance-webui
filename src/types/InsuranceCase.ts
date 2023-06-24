@@ -5,6 +5,7 @@ interface InsuranceCase {
   agent: string,
   status: string,
   phoneNumber: string,
+  email: string,
   caseDate: string,
   carMake: string,
   carModel: string,

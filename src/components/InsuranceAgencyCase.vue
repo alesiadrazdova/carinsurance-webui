@@ -2,53 +2,105 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-const tab = ref(null)
+const tab = ref('Client contacts')
 const route = useRoute()
 const id = route.params.id
 
-// Здесь загрузить данные о карточке по id и отобразить их
+// Load card data by id here and display it
 </script>
 
 <template>
-  <v-container>
-    <div class="pt-10">
-      <h1>User Case {{ id }}</h1>
-      <!-- Отображение информации о карточке по id -->
+  <v-container class="pt-10">
+    <div class="pb-10">
+      <h1>User Case №{{ id }}.</h1>
+      <!-- Displaying information about the card by id -->
     </div>
-    <v-card class="pt-10" variant="outlined">
-      <v-tabs
-        v-model="tab"
-        color="primary"
-        class="px-4"
-      >
-        <v-tab :value="1">Landscape</v-tab>
-        <v-tab :value="2">City</v-tab>
-        <v-tab :value="3">Abstract</v-tab>
-      </v-tabs>
-      <v-window v-model="tab">
-        <v-window-item
-          v-for="n in 3"
-          :key="n"
-          :value="n"
+    <v-card height="500">
+      <div class="d-flex flex-row">
+        <v-tabs
+          v-model="tab"
+          direction="vertical"
+          color="primary"
         >
-          <v-container fluid>
-            <v-row>
-              <v-col
-                v-for="i in 6"
-                :key="i"
-                cols="12"
-                md="4"
-              >
-                <v-img
-                  :src="`https://picsum.photos/500/300?image=${i * n * 5 + 10}`"
-                  :lazy-src="`https://picsum.photos/10/6?image=${i * n * 5 + 10}`"
-                  aspect-ratio="1"
-                ></v-img>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-window-item>
-      </v-window>
+          <v-tab value="option-1">
+            <v-icon start>
+              mdi-account
+            </v-icon>
+            Client contacts
+          </v-tab>
+          <v-tab value="option-2">
+            <v-icon start>
+              mdi-car-info
+            </v-icon>
+            Vehicle information
+          </v-tab>
+          <v-tab value="option-3">
+            <v-icon start>
+              mdi-car-cog
+            </v-icon>
+            Vehicle condition
+          </v-tab>
+          <v-tab value="option-4">
+            <v-icon start>
+              mdi-car-wrench
+            </v-icon>
+            Information for estimator
+          </v-tab>
+          <v-tab value="option-5">
+            <v-icon start>
+              mdi-shield-car
+            </v-icon>
+            Insurance agent information
+          </v-tab>
+        </v-tabs>
+        <v-window v-model="tab">
+          <v-window-item value="option-1">
+            <v-card flat>
+              <v-card-text>
+                <p>
+                  Sed aliquam ultrices mauris. Donec posuere vulputate arcu. Morbi ac felis. Etiam feugiat lorem non metus. Sed a libero.
+                </p>
+              </v-card-text>
+            </v-card>
+          </v-window-item>
+          <v-window-item value="option-2">
+            <v-card flat>
+              <v-card-text>
+                <p>
+                  Morbi nec metus. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Nunc sed turpis.
+                </p>
+              </v-card-text>
+            </v-card>
+          </v-window-item>
+          <v-window-item value="option-3">
+            <v-card flat>
+              <v-card-text>
+                <p>
+                  Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
+                </p>
+              </v-card-text>
+            </v-card>
+          </v-window-item>
+          <v-window-item value="option-4">
+            <v-card flat>
+              <v-card-text>
+                <p>
+                  Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
+                </p>
+              </v-card-text>
+            </v-card>
+          </v-window-item>
+          <v-window-item value="option-5">
+            <v-card flat>
+              <v-card-text>
+                <p>
+                  Fusce a quam. Phasellus nec sem in justo pellentesque facilisis. Nam eget dui. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. In dui magna, posuere eget, vestibulum et, tempor auctor, justo.
+                </p>
+              </v-card-text>
+            </v-card>
+          </v-window-item>
+        </v-window>
+      </div>
     </v-card>
   </v-container>
 </template>
