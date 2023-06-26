@@ -60,13 +60,13 @@ const openCreateCaseDialog = () => {
     </template>
     <v-card class="pb-2">
       <v-card-title class="mt-6 text-center">
-        <h2 class="text-indigo-darken-2">Insurance case form</h2>
+        <h1 class="font-weight-bold">Insurance case form</h1>
       </v-card-title>
       <v-card-text>
         <v-container class="py-0">
           <v-row>
             <v-col cols="12">
-              <span class="text-h6 font-weight-medium">Contacts</span>
+              <span class="text-h5 font-weight-medium text-primary">Contacts</span>
             </v-col>
             <v-col cols="12" sm="6" md="4">
               <v-text-field
@@ -92,14 +92,14 @@ const openCreateCaseDialog = () => {
                 </template>
               </v-text-field>
             </v-col>
-            <v-col cols="12" sm="8">
+            <v-col cols="12" sm="6">
               <v-select
                 label="Select Insurance company"
                 prepend-inner-icon="mdi-shield-car"
                 :items="['Company1', 'Company2', 'Company3']"
               ></v-select>
             </v-col>
-            <v-col cols="12" sm="4">
+            <v-col cols="12" sm="6" md="3">
               <vue-date-picker
               v-model="insuranceExpiryDate"
               :style="{ '--dp-input-padding' : '15px 0', '--dp-input-icon-padding' : '47px' }"
@@ -111,7 +111,20 @@ const openCreateCaseDialog = () => {
                 <v-icon class="px-4">mdi-clock-time-eight</v-icon>
               </template>
             </vue-date-picker>
-            <p class="text-caption text-grey-darken-1">Select insurance expiry date</p>
+            <p class="text-caption text-primary font-weight-medium">Select insurance expiry date</p>
+            </v-col>
+            <v-col cols="12" sm="6" md="3">
+              <vue-date-picker
+                v-model="incidentDate"
+                :style="{ '--dp-input-padding' : '15px 0', '--dp-input-icon-padding' : '47px' }"
+                class="date-picker"
+                required
+              >
+                  <template #input-icon>
+                    <v-icon class="px-4">mdi-clock-time-eight</v-icon>
+                  </template>
+              </vue-date-picker>
+              <p class="text-caption text-primary font-weight-medium">Select incident date</p>
             </v-col>
             <v-col cols="12" sm="6" md="4">
               <v-select
@@ -177,7 +190,7 @@ const openCreateCaseDialog = () => {
               </v-textarea>
             </v-col>
             <v-col cols="12">
-              <span class="text-h6 font-weight-medium">Vehicle information</span>
+              <span class="text-h5 font-weight-medium text-primary">Vehicle information</span>
             </v-col>
             <v-col cols="12" sm="6">
               <v-text-field
@@ -268,36 +281,27 @@ const openCreateCaseDialog = () => {
                 <v-icon class="px-4">mdi-clock-time-eight</v-icon>
               </template>
             </vue-date-picker>
-            <p class="text-caption text-grey-darken-1">License expiration</p>
+            <p class="text-caption text-primary font-weight-medium">License expiration</p>
             </v-col>
             <v-col cols="12">
-              <span class="text-h6 font-weight-medium">Vehicle condition</span>
+              <span class="text-h5 font-weight-medium text-primary">Vehicle condition</span>
             </v-col>
-            <v-col cols="12" sm="6">
-              <vue-date-picker
-                v-model="incidentDate"
-                :style="{ '--dp-input-padding' : '15px 0', '--dp-input-icon-padding' : '47px' }"
-                class="date-picker"
-                required
-              >
-                  <template #input-icon>
-                    <v-icon class="px-4">mdi-clock-time-eight</v-icon>
-                  </template>
-              </vue-date-picker>
-              <p class="text-caption text-grey-darken-1">Select incident date</p>
-            </v-col>
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="4">
               <v-select
                 label="Select direction of an impact"
                 prepend-inner-icon="mdi-car-wrench"
                 :items="['Front', 'Front right', 'Right side', 'Right quarter panel', 'Right rear', 'Rear', 'Front left', 'Left side', 'Left quarter panel', 'Left rear']"
+                multiple
+                chips
+                persistent-hint
               ></v-select>
             </v-col>
-            <v-col  cols="12">
+            <v-col  cols="12" sm="8">
               <v-file-input
                 show-size
                 counter
                 multiple
+                chips
                 label="File input"
                 variant="filled"
                 prepend-inner-icon="mdi-camera"

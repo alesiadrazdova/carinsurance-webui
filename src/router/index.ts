@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import UserPage from '@/views/UserDetails.vue'
-import InsuranceAgency from '@/views/InsuranceAgencyPage.vue'
-import Estimator from '@/views/EstimatorPage.vue'
+import InsuranceAgencyDetails from '@/views/InsuranceAgencyDetails.vue'
+import Estimator from '@/views/EstimatorDetails.vue'
 import Home from '@/views/Home.vue'
+import InsuranceAgencyCase from '@/components/InsuranceAgencyCase.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,8 +29,14 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'api/insurance_agency',
         name: 'InsuranceAgencyPage',
-        component: InsuranceAgency,
-        meta: { requiresAuth: true, role: 'ROLE_Insurance agency' }
+        component: InsuranceAgencyDetails,
+        meta: { requiresAuth: true, role: 'ROLE_Insurance agency' },
+      },
+      {
+        path: 'api/insurance_agency/user_case/:id',
+        name: 'InsuranceAgencyCase',
+        component: InsuranceAgencyCase,
+        meta: { requiresAuth: true, role: 'ROLE_Insurance agency' },
       },
       {
         path: 'api/estimator',

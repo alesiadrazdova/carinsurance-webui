@@ -44,12 +44,15 @@ export const useLoginStore = defineStore('login', () => {
 
           switch (roleValue) {
             case 'ROLE_Client':
+              role.value = roleValue
               router.push('/api/client')
               break
             case 'ROLE_Insurance agency':
+              role.value = roleValue
               router.push('/api/insurance_agency')
               break
             case 'ROLE_Estimator':
+              role.value = roleValue
               router.push('/api/estimator')
               break
             default:

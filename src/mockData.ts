@@ -7,12 +7,13 @@ export const mockCases: CaseInsurance[] = [
     lastName: "Smith",
     agent: 'Insurance Agency Cascade',
     status: 'pending',
-    phoneNumber: "524857452",
-    caseDate: "",
+    phoneNumber: "+524857452",
+    email: "johnsmith@gmail.com",
+    caseDate: "2023-08-21T00:00:00.000Z",
     carMake: "BMW",
     carModel: "118i",
     carYear: 2014,
-    accidentLocation: "London, str.5th Avenue, 45-7",
+    insuranceExpiryDate: "2023-12-12T00:00:00.000Z",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \
@@ -30,12 +31,13 @@ export const mockCases: CaseInsurance[] = [
     lastName: "Smith",
     agent: 'Insurance Agency Cascade',
     status: 'paid',
-    phoneNumber: "524857452",
+    phoneNumber: "+524857452",
+    email: "johnsmith@gmail.com",
     caseDate: "2022-12-12T00:00:00.000Z",
     carMake: "BMW",
     carModel: "118i",
     carYear: 2014,
-    accidentLocation: "London, str.5th Avenue, 45-7",
+    insuranceExpiryDate: "2024-05-27T00:00:00.000Z",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \
@@ -53,12 +55,13 @@ export const mockCases: CaseInsurance[] = [
     lastName: "Smith",
     agent: 'Insurance Agency Cascade',
     status: 'paid',
-    phoneNumber: "524857452",
+    phoneNumber: "+524857452",
+    email: "johnsmith@gmail.com",
     caseDate: "2023-05-27T00:00:00.000Z",
     carMake: "Toyota",
     carModel: "Corola",
     carYear: 2017,
-    accidentLocation: "London, str.5th Avenue, 45-7",
+    insuranceExpiryDate: "2024-08-01T00:00:00.000Z",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \
@@ -76,12 +79,13 @@ export const mockCases: CaseInsurance[] = [
     lastName: "Jexson",
     agent: 'BlambInsurance Agency',
     status: 'pending',
-    phoneNumber: "524857452",
+    phoneNumber: "+524857452",
+    email: "oliviajex@gmail.com",
     caseDate: "2023-04-15T00:00:00.000Z",
     carMake: "Subaru",
     carModel: "Forester",
     carYear: 2008,
-    accidentLocation: "London, str.5th Avenue, 45-7",
+    insuranceExpiryDate: "2024-08-01T00:00:00.000Z",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \
@@ -99,12 +103,13 @@ export const mockCases: CaseInsurance[] = [
     lastName: "Jexson",
     agent: 'BlambInsurance Agency',
     status: 'paid',
-    phoneNumber: "524857452",
+    phoneNumber: "+524857452",
+    email: "oliviajex@gmail.com",
     caseDate: "2021-08-01T00:00:00.000Z",
     carMake: "Subaru",
     carModel: "Forester",
     carYear: 2008,
-    accidentLocation: "London, str.5th Avenue, 45-7",
+    insuranceExpiryDate: "2023-11-27T00:00:00.000Z",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \
@@ -122,12 +127,13 @@ export const mockCases: CaseInsurance[] = [
     lastName: "Simpson",
     agent: 'Insurance Agency Cascade',
     status: 'pending',
-    phoneNumber: "524857452",
+    phoneNumber: "+524857452",
+    email: "jessica@gmail.com",
     caseDate: "2022-02-12T00:00:00.000Z",
     carMake: "Audi",
     carModel: "Q8",
     carYear: 2010,
-    accidentLocation: "London, str.5th Avenue, 45-7",
+    insuranceExpiryDate: "2023-10-30T00:00:00.000Z",
     description: "Lorem ipsum dolor sit amet. Ut saepe nobis et culpa consequatur id nobis quam. \
                 Id quia sint id nesciunt dicta non animi fugiat ad vero necessitatibus est autem consequuntur? \
                 Et maxime velit ut temporibus voluptate in architecto perferendis eum sunt laudantium eum dolorem \
