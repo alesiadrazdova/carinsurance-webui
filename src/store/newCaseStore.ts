@@ -109,5 +109,33 @@ export const useNewCaseStore = defineStore('newCase', {
         console.error('Куки "token" не найдены или не содержат значение.')
       }
     },
+    clearForm() {
+      this.dialogVisible = false
+      this.insuranceExpiryDate = new Date()
+      this.incidentDate = new Date()
+      this.licenseExpiration = new Date()
+      this.user = {
+        phoneNumber: '',
+        email: '',
+        insuranceCompany: '',
+        carMake: '',
+        carModel: '',
+        carYear: null,
+        VIN: '',
+        odometer: null,
+        licensePlate: '',
+        description: '',
+        address: '',
+        zip: '',
+        state: '',
+        city: '',
+        licenseState: '',
+        licenseExpiration: '',
+        impactDirections: [],
+        typeOfPhone: '',
+        typeOfAddress: '',
+        images: [],
+      }
+    }
   },
 })

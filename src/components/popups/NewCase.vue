@@ -13,6 +13,8 @@ const closeDialog = () => {
 
 const submitForm = async () => {
   await newCaseStore.submitForm()
+  newCaseStore.clearForm()
+  closeDialog()
 }
 </script>
 
