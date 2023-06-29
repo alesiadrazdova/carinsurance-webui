@@ -15,3 +15,15 @@ export async function loginUser(login: string, password: string) {
 
   return response
 }
+
+export const apiService = {
+  async postCase(formData: FormData, token: string): Promise<Response> {
+    return fetch(API_URLS.CASE, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      body: formData,
+    })
+  },
+}

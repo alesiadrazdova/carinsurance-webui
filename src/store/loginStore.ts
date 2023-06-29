@@ -32,28 +32,26 @@ export const useLoginStore = defineStore('login', () => {
       if (response.status === 200) {
         const data = await response.json()
         const roleMatch = data.role.match(/\[(.*?)\]/)
-        const authenticated = data.message
 
         if (roleMatch) {
           const roleValue = roleMatch[1].trim()
 
           role.value = roleValue
           localStorage.setItem('role', roleValue)
-          localStorage.setItem('message', authenticated)
           errorMessage.value = login.value = password.value = ''
 
           switch (roleValue) {
             case 'ROLE_Client':
               role.value = roleValue
-              router.push('/api/client')
+              router.push('/client')
               break
             case 'ROLE_Insurance agency':
               role.value = roleValue
-              router.push('/api/insurance_agency')
+              router.push('/insurance_agency')
               break
             case 'ROLE_Estimator':
               role.value = roleValue
-              router.push('/api/estimator')
+              router.push('/estimator')
               break
             default:
               console.error('Unknown role')

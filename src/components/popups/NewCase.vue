@@ -2,43 +2,17 @@
 import { ref } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
+import { useNewCaseStore } from '@/store/newCaseStore'
 
 const dialogVisible = ref(false)
-// temporary mock data
-const insuranceExpiryDate = ref(new Date())
-const incidentDate = ref(new Date())
-const licenseExpiration = ref(new Date())
-const user = ref({
-  phoneNumber: '',
-  email: '',
-  insuranceCompany: '',
-  carMake: '',
-  carModel: '',
-  carYear: null,
-  VIN: '',
-  odometer: '',
-  licensePlate: '',
-  description: '',
-  address: '',
-  zip: '',
-  state: '',
-  city: '',
-  licenseState: '',
-  licenseExpiration: '',
-  images: [],
-})
+const newCaseStore = useNewCaseStore()
 
 const closeDialog = () => {
   dialogVisible.value = false
 }
 
-const submitForm = () => {
-  // handing form data
-  closeDialog()
-}
-
-const openCreateCaseDialog = () => {
-  dialogVisible.value = true
+const submitForm = async () => {
+  await newCaseStore.submitForm()
 }
 </script>
 
@@ -71,12 +45,13 @@ const openCreateCaseDialog = () => {
             <v-col cols="12" sm="6" md="4">
               <v-text-field
                 label="Email"
-                v-model="user.email"
+                v-model="newCaseStore.user.email"
                 prepend-inner-icon="mdi-email"
               ></v-text-field>
             </v-col>
             <v-col cols="12" sm="6" md="4">
               <v-select
+                v-model="newCaseStore.user.typeOfPhone"
                 label="Select type of phone"
                 :items="['Home', 'Business', 'Mobile', 'Fax', 'Other']"
               ></v-select>
@@ -84,7 +59,7 @@ const openCreateCaseDialog = () => {
             <v-col cols="12" sm="6" md="4">
               <v-text-field
                 required
-                v-model="user.phoneNumber"
+                v-model="newCaseStore.user.phoneNumber"
                 prepend-inner-icon="mdi-phone"
               >
                 <template v-slot:label>
@@ -101,7 +76,7 @@ const openCreateCaseDialog = () => {
             </v-col>
             <v-col cols="12" sm="6" md="3">
               <vue-date-picker
-              v-model="insuranceExpiryDate"
+              v-model="newCaseStore.insuranceExpiryDate"
               :style="{ '--dp-input-padding' : '15px 0', '--dp-input-icon-padding' : '47px' }"
               class="date-picker"
               required
@@ -115,7 +90,7 @@ const openCreateCaseDialog = () => {
             </v-col>
             <v-col cols="12" sm="6" md="3">
               <vue-date-picker
-                v-model="incidentDate"
+                v-model="newCaseStore.incidentDate"
                 :style="{ '--dp-input-padding' : '15px 0', '--dp-input-icon-padding' : '47px' }"
                 class="date-picker"
                 required
@@ -128,6 +103,7 @@ const openCreateCaseDialog = () => {
             </v-col>
             <v-col cols="12" sm="6" md="4">
               <v-select
+              v-model="newCaseStore.user.typeOfAddress"
                 label="Select type of address"
                 prepend-inner-icon="mdi-home"
                 :items="['Home', 'Work', 'Mailing', 'Other']"
@@ -136,7 +112,7 @@ const openCreateCaseDialog = () => {
             <v-col cols="12" sm="6" md="4">
               <v-text-field
                 required
-                v-model="user.zip"
+                v-model="newCaseStore.user.zip"
               >
                 <template v-slot:label>
                   <span class="required">Zip</span>
@@ -147,7 +123,7 @@ const openCreateCaseDialog = () => {
               <v-text-field
                 prepend-inner-icon="mdi-map-marker"
                 required
-                v-model="user.state"
+                v-model="newCaseStore.user.state"
               >
                 <template v-slot:label>
                   <span class="required">State</span>
@@ -158,7 +134,7 @@ const openCreateCaseDialog = () => {
               <v-text-field
                 prepend-inner-icon="mdi-map-marker"
                 required
-                v-model="user.city"
+                v-model="newCaseStore.user.city"
               >
                 <template v-slot:label>
                   <span class="required">City</span>
@@ -169,7 +145,7 @@ const openCreateCaseDialog = () => {
               <v-text-field
                 prepend-inner-icon="mdi-map-marker"
                 required
-                v-model="user.address"
+                v-model="newCaseStore.user.address"
               >
                 <template v-slot:label>
                   <span class="required">Address</span>
@@ -181,7 +157,7 @@ const openCreateCaseDialog = () => {
                 label="Incident Information"
                 type="text"
                 aria-required
-                v-model="user.description"
+                v-model="newCaseStore.user.description"
                 prepend-inner-icon="mdi-pencil"
               >
                 <template v-slot:label>
@@ -195,7 +171,7 @@ const openCreateCaseDialog = () => {
             <v-col cols="12" sm="6">
               <v-text-field
                 required
-                v-model="user.carMake"
+                v-model="newCaseStore.user.carMake"
                 prepend-inner-icon="mdi-car-info"
               >
                 <template v-slot:label>
@@ -206,7 +182,7 @@ const openCreateCaseDialog = () => {
             <v-col cols="12" sm="6">
               <v-text-field
                 required
-                v-model="user.carModel"
+                v-model="newCaseStore.user.carModel"
                 prepend-inner-icon="mdi-car-info"
               >
                 <template v-slot:label>
@@ -218,7 +194,7 @@ const openCreateCaseDialog = () => {
               <v-text-field
                 persistent-hint
                 required
-                v-model="user.carYear"
+                v-model="newCaseStore.user.carYear"
               >
                 <template v-slot:label>
                   <span class="required">Car year</span>
@@ -229,7 +205,7 @@ const openCreateCaseDialog = () => {
               <v-text-field
                 persistent-hint
                 required
-                v-model="user.VIN"
+                v-model="newCaseStore.user.VIN"
               >
                 <template v-slot:label>
                   <span class="required">VIN</span>
@@ -240,7 +216,7 @@ const openCreateCaseDialog = () => {
               <v-text-field
                 persistent-hint
                 required
-                v-model="user.odometer"
+                v-model="newCaseStore.user.odometer"
               >
                 <template v-slot:label>
                   <span class="required">Odometer Value</span>
@@ -251,7 +227,7 @@ const openCreateCaseDialog = () => {
               <v-text-field
                 persistent-hint
                 required
-                v-model="user.licensePlate"
+                v-model="newCaseStore.user.licensePlate"
               >
                 <template v-slot:label>
                   <span class="required">License Plate</span>
@@ -262,7 +238,7 @@ const openCreateCaseDialog = () => {
               <v-text-field
                 persistent-hint
                 required
-                v-model="user.licenseState"
+                v-model="newCaseStore.user.licenseState"
               >
                 <template v-slot:label>
                   <span class="required">License State</span>
@@ -271,7 +247,7 @@ const openCreateCaseDialog = () => {
             </v-col>
             <v-col cols="12" sm="4">
               <vue-date-picker
-                v-model="licenseExpiration"
+                v-model="newCaseStore.licenseExpiration"
                 :style="{ '--dp-input-padding' : '15px 0', '--dp-input-icon-padding' : '47px' }"
                 class="date-picker"
                 required
@@ -288,9 +264,10 @@ const openCreateCaseDialog = () => {
             </v-col>
             <v-col cols="12" sm="4">
               <v-select
+              v-model="newCaseStore.user.impactDirections"
                 label="Select direction of an impact"
                 prepend-inner-icon="mdi-car-wrench"
-                :items="['Front', 'Front right', 'Right side', 'Right quarter panel', 'Right rear', 'Rear', 'Front left', 'Left side', 'Left quarter panel', 'Left rear']"
+                :items="['Front', 'FrontRight', 'RightSide', 'RightQuarterPanel', 'RightRear', 'Rear', 'FrontLeft', 'LeftSide', 'LeftQuarterPanel', 'LeftRear']"
                 multiple
                 chips
                 persistent-hint
@@ -305,7 +282,7 @@ const openCreateCaseDialog = () => {
                 label="File input"
                 variant="filled"
                 prepend-inner-icon="mdi-camera"
-                v-model="user.images"
+                v-model="newCaseStore.user.images"
               ></v-file-input>
             </v-col>
           </v-row>
