@@ -7,6 +7,7 @@ const rules = ref({
   required: ( value: String ) => !!value || 'Required.',
   min: ( v: String ) => v.length >= 5 || 'Min 5 characters'
 })
+
 const loginStore = useLoginStore()
 
 </script>

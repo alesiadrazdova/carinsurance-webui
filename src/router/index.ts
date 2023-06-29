@@ -5,6 +5,7 @@ import InsuranceAgencyDetails from '@/views/InsuranceAgencyDetails.vue'
 import Estimator from '@/views/EstimatorDetails.vue'
 import Home from '@/views/Home.vue'
 import InsuranceAgencyCase from '@/components/InsuranceAgencyCase.vue'
+import { useLoginStore } from '@/store/loginStore'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -54,17 +55,15 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const loginStore = useLoginStore()
   const currentUserRole = localStorage.getItem('role')
-  let isAuthenticated = false
-  if(currentUserRole) {
-    isAuthenticated = true
-  }
+
   const requiredAuth = to.matched.some(record => record.meta.requiresAuth)
   const role = to.matched[to.matched.length - 1]?.meta.role
 
-  if (requiredAuth && !isAuthenticated) {
+  if (requiredAuth && !loginStore.isAuthenticated) {
     next('/auth/login')
-  } else if (requiredAuth && isAuthenticated && role) {
+  } else if (requiredAuth && loginStore.isAuthenticated && role) {
       if (currentUserRole !== role) {
         next(from.path)
       } else {
