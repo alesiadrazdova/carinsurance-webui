@@ -21,25 +21,25 @@ const routes: Array<RouteRecordRaw> = [
         component: Home,
       },
       {
-        path: 'api/client',
+        path: 'client',
         name: 'UserPage',
         component: UserPage,
         meta: { requiresAuth: true, role: 'ROLE_Client' }
       },
       {
-        path: 'api/insurance_agency',
+        path: 'insurance_agency',
         name: 'InsuranceAgencyPage',
         component: InsuranceAgencyDetails,
         meta: { requiresAuth: true, role: 'ROLE_Insurance agency' },
       },
       {
-        path: 'api/insurance_agency/user_case/:id',
+        path: 'insurance_agency/user_case/:id',
         name: 'InsuranceAgencyCase',
         component: InsuranceAgencyCase,
         meta: { requiresAuth: true, role: 'ROLE_Insurance agency' },
       },
       {
-        path: 'api/estimator',
+        path: 'estimator',
         name: 'EstimatorPage',
         component: Estimator,
         meta: { requiresAuth: true, role: 'ROLE_Estimator' }
@@ -54,10 +54,9 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const authenticated = localStorage.getItem('message')
   const currentUserRole = localStorage.getItem('role')
   let isAuthenticated = false
-  if(authenticated === 'Login successful') {
+  if(currentUserRole) {
     isAuthenticated = true
   }
   const requiredAuth = to.matched.some(record => record.meta.requiresAuth)
