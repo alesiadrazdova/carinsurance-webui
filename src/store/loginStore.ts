@@ -11,6 +11,9 @@ export const useLoginStore = defineStore('login', () => {
   const errorMessage = ref('')
   const router = useRouter()
   const snackbar = ref(false)
+  const isAuthenticated = ref(false)
+  const firstName = ref('')
+  const lastName = ref('')
 
   const setLogin = (newLogin: string) => {
     login.value = newLogin
@@ -32,12 +35,16 @@ export const useLoginStore = defineStore('login', () => {
       if (response.status === 200) {
         const data = await response.json()
         const roleMatch = data.role.match(/\[(.*?)\]/)
+        firstName.value = data.firstname
+        lastName.value = data.lastName
+        isAuthenticated.value = true
 
         if (roleMatch) {
           const roleValue = roleMatch[1].trim()
 
           role.value = roleValue
           localStorage.setItem('role', roleValue)
+          localStorage.setItem
           errorMessage.value = login.value = password.value = ''
 
           switch (roleValue) {
@@ -73,15 +80,26 @@ export const useLoginStore = defineStore('login', () => {
       isLoading.value = false
     }
 
+  const logout = () => {
+    role.value = ''
+    localStorage.removeItem('role')
+    router.push('/')
+    isAuthenticated.value = false
+  }
+
   return {
     login,
     password,
     role,
+    firstName,
+    lastName,
     isLoading,
     errorMessage,
     setLogin,
     setPassword,
     submitForm,
-    snackbar
+    snackbar,
+    logout,
+    isAuthenticated
   }
 })
